@@ -37,11 +37,11 @@
 
     <Button
         android:id="@+id/save_note_button"
-        android:paddingBottom="16sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="16sp"
         android:text="@string/save_note_button"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_note_content" />
 </androidx.constraintlayout.widget.ConstraintLayout>
