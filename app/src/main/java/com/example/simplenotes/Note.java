@@ -39,6 +39,9 @@ public class Note {
         this.mReminder = mReminder;
     }
 
+    String getmNoteTitle(){ return mNoteTitle; }
+    public String getmNoteContent(){ return mNoteContent; }
+
     @NonNull
     @Override
     public String toString() {
