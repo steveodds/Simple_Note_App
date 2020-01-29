@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class NotesHandler {
     private ArrayList<Note> mNotes = new ArrayList<>();
 
-    public NotesHandler() {
+    NotesHandler() {
 
     }
 
@@ -15,7 +15,7 @@ public class NotesHandler {
         this.mNotes = mNotes;
     }
 
-    public void addNoteToList(Note note){
+    void addNoteToList(Note note){
         if (note == null)
             throw new IllegalArgumentException("Cannot add a null note to the list.");
 
@@ -50,6 +50,15 @@ public class NotesHandler {
         else {
             readNotesFromDB(numberOfNotes);
         }
+    }
+
+    boolean exists(String noteTitle){
+        for (Note note :
+                mNotes) {
+            if (note.getmNoteTitle().equals(noteTitle))
+                return true;
+        }
+        return false;
     }
 
     @NonNull
