@@ -21,7 +21,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 public class new_note extends AppCompatActivity {
@@ -51,7 +50,7 @@ public class new_note extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked){
-                    Date reminderDate = fetchReminderDate();
+                    Calendar reminderDate = fetchReminderDate();
                     setReminder(reminderDate);
                     hasReminder = true;
                 } else {
@@ -86,18 +85,17 @@ public class new_note extends AppCompatActivity {
         //TODO remove reminder
     }
 
-    private void setReminder(Date reminderDate) {
+    private void setReminder(Calendar reminderDate) {
         //TODO register reminder with system
     }
 
-    private Date fetchReminderDate() {
+    private Calendar fetchReminderDate() {
         Calendar local = Calendar.getInstance();
         int day = local.get(Calendar.DAY_OF_MONTH);
         int month = local.get(Calendar.MONTH);
         int year = local.get(Calendar.YEAR);
         int hour = local.get(Calendar.HOUR_OF_DAY);
         int minute = local.get(Calendar.MINUTE);
-
         DatePickerDialog datePicker = new DatePickerDialog(new_note.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
@@ -117,7 +115,7 @@ public class new_note extends AppCompatActivity {
         }, hour, minute, false);
         timePickerDialog.show();
 
-        return reminderDateTime.getTime();
+        return reminderDateTime;
     }
 
     private void validateThenSave(String title, String content, boolean hasReminder) {
@@ -153,6 +151,7 @@ public class new_note extends AppCompatActivity {
     private boolean saveNote(String noteTitle, String noteContent, boolean hasReminder) {
         try {
             Note newNote = new Note(noteTitle.trim(), noteContent, hasReminder);
+            //TODO Add dates
             newlyCreatedNotes.addNoteToList(newNote);
             return true;
         } catch (Exception e) {
