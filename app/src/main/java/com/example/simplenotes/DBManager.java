@@ -87,8 +87,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     NotesHandler ReadAllFromDB() {
         NotesHandler notes = new NotesHandler();
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME + " ORDER BY " +
-                COLUMN_TIMESTAMP + " DESC";
+        String selectQuery = "SELECT * FROM " + TABLE_NAME;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

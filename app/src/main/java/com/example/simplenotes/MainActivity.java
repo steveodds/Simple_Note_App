@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,7 +12,11 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+    private static ArrayList<Note> mNotes = new ArrayList<>();
+    private static int numberOfNotes = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(newNoteScreen);
             }
         });
+
+        NotesHandler notes = new NotesHandler();
+        notes.getAllNotesFromDB(this);
+        mNotes = notes.getmNotes();
+        numberOfNotes = mNotes.size();
     }
 
     @Override

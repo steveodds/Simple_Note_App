@@ -38,7 +38,8 @@ public class new_note extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         try {
-            newlyCreatedNotes.saveAllNotesToDB(this);
+            if (newlyCreatedNotes.getmNotes().size() > 0)
+                newlyCreatedNotes.saveAllNotesToDB(this);
         } catch (Exception e){
             Log.d("DB ACTION: ", "onPause: Failed to write notes to db => " + e);
         }

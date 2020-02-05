@@ -47,7 +47,7 @@ public class NotesHandler {
         writeNotesToDisk(context);
     }
 
-    public void getAllNotesFromDB(int numberOfNotes, Context context) {
+    public void getAllNotesFromDB(Context context) {
         readAllNotesFromDB(context);
     }
 
