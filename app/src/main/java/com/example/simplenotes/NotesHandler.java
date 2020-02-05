@@ -1,11 +1,15 @@
 package com.example.simplenotes;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
 public class NotesHandler {
     private ArrayList<Note> mNotes = new ArrayList<>();
+
+    ArrayList<Note> getmNotes() { return mNotes; }
 
     NotesHandler() {
 
@@ -15,44 +19,39 @@ public class NotesHandler {
         this.mNotes = mNotes;
     }
 
-    void addNoteToList(Note note){
+    void addNoteToList(Note note) {
         if (note == null)
             throw new IllegalArgumentException("Cannot add a null note to the list.");
 
         mNotes.add(note);
     }
 
-    public void removeNoteFromList(Note note){
+    public void removeNoteFromList(Note note) {
         if (note == null)
             throw new IllegalArgumentException("The list you attempted to remove is null.");
 
         mNotes.remove(note);
     }
 
-    public int numberOfNotesInList(){
+    public int numberOfNotesInList() {
         return mNotes.size();
     }
 
-    public void deleteNotesFromList(){
+    public void deleteNotesFromList() {
         mNotes.clear();
     }
 
-    public void saveAllNotesToDB(){
+    void saveAllNotesToDB(Context context) {
         if (mNotes == null)
             throw new IllegalArgumentException("Cannot save null list.");
-        writeNotesToDisk();
+        writeNotesToDisk(context);
     }
 
-    public void getAllNotesFromDB(int numberOfNotes){
-        if (numberOfNotes == 0) {
-            readAllNotesFromDB();
-        }
-        else {
-            readNotesFromDB(numberOfNotes);
-        }
+    public void getAllNotesFromDB(int numberOfNotes, Context context) {
+        readAllNotesFromDB(context);
     }
 
-    boolean exists(String noteTitle){
+    boolean exists(String noteTitle) {
         for (Note note :
                 mNotes) {
             if (note.getmNoteTitle().equals(noteTitle))
@@ -66,22 +65,23 @@ public class NotesHandler {
     public String toString() {
         StringBuilder noteTitles = new StringBuilder();
 
-        for (Note note: mNotes) {
+        for (Note note : mNotes) {
             noteTitles.append(note.getmNoteTitle());
         }
 
         return noteTitles.toString();
     }
 
-    private void writeNotesToDisk() {
-        //TODO Add logic for passing the list to be saved
+    private void writeNotesToDisk(Context context) {
+        DBManager db = new DBManager(context);
+        for (Note note :
+                mNotes) {
+            db.WriteToDB(note.getmNoteTitle(), note.getmNoteContent(), note.ismHasReminder());
+        }
     }
 
-    private void readNotesFromDB(int numberOfNotes) {
-        //TODO Read records of notes starting from the index
-    }
-
-    private void readAllNotesFromDB() {
-        //TODO Read all records of notes and populate the ArrayList
+    private void readAllNotesFromDB(Context context) {
+        DBManager fromDB = new DBManager(context);
+        mNotes = fromDB.ReadAllFromDB().getmNotes();
     }
 }

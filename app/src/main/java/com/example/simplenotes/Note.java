@@ -42,6 +42,7 @@ public class Note {
     Calendar getmModifiedDate() { return mModifiedDate; }
     String getmNoteTitle(){ return mNoteTitle; }
     String getmNoteContent(){ return mNoteContent; }
+    boolean ismHasReminder() { return mHasReminder; }
 
     //SETTERS
     void setmNoteTitle(String mNoteTitle) { this.mNoteTitle = mNoteTitle; }

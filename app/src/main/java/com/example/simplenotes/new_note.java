@@ -35,6 +35,16 @@ public class new_note extends AppCompatActivity {
     Calendar reminderDateTime;
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            newlyCreatedNotes.saveAllNotesToDB(this);
+        } catch (Exception e){
+            Log.d("DB ACTION: ", "onPause: Failed to write notes to db => " + e);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_note);
@@ -49,7 +59,7 @@ public class new_note extends AppCompatActivity {
         reminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     Calendar reminderDate = fetchReminderDate();
                     setReminder(reminderDate);
                     hasReminder = true;
@@ -74,7 +84,7 @@ public class new_note extends AppCompatActivity {
                 String content = noteContentFromView.getText().toString();
 
                 //TODO Add editing check
-                if (!hasEmpties(title, content)){
+                if (!hasEmpties(title, content)) {
                     validateThenSave(title, content, hasReminder);
                 }
             }
@@ -98,7 +108,7 @@ public class new_note extends AppCompatActivity {
         int minute = local.get(Calendar.MINUTE);
         boolean dateRun = GetDate(day, month, year);
 
-        if (dateRun){
+        if (dateRun) {
             TimePickerDialog timePickerDialog = new TimePickerDialog(new_note.this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
@@ -143,11 +153,11 @@ public class new_note extends AppCompatActivity {
     }
 
     private boolean hasEmpties(String titleText, String contentText) {
-        if (titleText.trim().isEmpty()){
+        if (titleText.trim().isEmpty()) {
             snackbar = Snackbar.make(findViewById(R.id.coordinatorLayout), "You cannot have an empty title", Snackbar.LENGTH_LONG);
             snackbar.show();
             return true;
-        } else if (contentText.trim().isEmpty()){
+        } else if (contentText.trim().isEmpty()) {
             snackbar = Snackbar.make(findViewById(R.id.coordinatorLayout), "You cannot have an empty note body", Snackbar.LENGTH_LONG);
             snackbar.show();
             return true;
