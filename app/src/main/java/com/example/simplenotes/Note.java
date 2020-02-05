@@ -6,9 +6,12 @@ import androidx.annotation.NonNull;
 import java.util.Calendar;
 
 public class Note {
+
+
     private String mNoteTitle;
     private String mNoteContent;
     private Calendar mCreationDate;
+    private String mCreationDateS;
     private Calendar mModifiedDate;
     private Calendar mReminder;
     private boolean mHasReminder;
@@ -41,12 +44,12 @@ public class Note {
     String getmNoteContent(){ return mNoteContent; }
 
     //SETTERS
-    public void setmNoteTitle(String mNoteTitle) { this.mNoteTitle = mNoteTitle; }
-    public void setmNoteContent(String mNoteContent) { this.mNoteContent = mNoteContent; }
-    public void setmCreationDate(Calendar mCreationDate) { this.mCreationDate = mCreationDate; }
-    public void setmModifiedDate(Calendar mModifiedDate) { this.mModifiedDate = mModifiedDate; }
-    public void setmHasReminder(boolean mHasReminder) { this.mHasReminder = mHasReminder; }
-    public void setmReminder(Calendar mReminder) { this.mReminder = mReminder; }
+    void setmNoteTitle(String mNoteTitle) { this.mNoteTitle = mNoteTitle; }
+    void setmNoteContent(String mNoteContent) { this.mNoteContent = mNoteContent; }
+    void setmCreationDate(String mCreationDateS) { this.mCreationDateS = mCreationDateS; }
+    void setmModifiedDate(Calendar mModifiedDate) { this.mModifiedDate = mModifiedDate; }
+    void setmHasReminder(boolean mHasReminder) { this.mHasReminder = mHasReminder; }
+    void setmReminder(Calendar mReminder) { this.mReminder = mReminder; }
 
 
     @NonNull
