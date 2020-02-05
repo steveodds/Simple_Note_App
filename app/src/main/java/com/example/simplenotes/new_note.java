@@ -96,6 +96,23 @@ public class new_note extends AppCompatActivity {
         int year = local.get(Calendar.YEAR);
         int hour = local.get(Calendar.HOUR_OF_DAY);
         int minute = local.get(Calendar.MINUTE);
+        boolean dateRun = GetDate(day, month, year);
+
+        if (dateRun){
+            TimePickerDialog timePickerDialog = new TimePickerDialog(new_note.this, new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                    reminderDateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    reminderDateTime.set(Calendar.MINUTE, minute);
+                }
+            }, hour, minute, false);
+            timePickerDialog.show();
+        }
+
+        return reminderDateTime;
+    }
+
+    private boolean GetDate(int day, int month, int year) {
         DatePickerDialog datePicker = new DatePickerDialog(new_note.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
@@ -105,17 +122,7 @@ public class new_note extends AppCompatActivity {
             }
         }, year, month, day);
         datePicker.show();
-
-        TimePickerDialog timePickerDialog = new TimePickerDialog(new_note.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-                reminderDateTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                reminderDateTime.set(Calendar.MINUTE, minute);
-            }
-        }, hour, minute, false);
-        timePickerDialog.show();
-
-        return reminderDateTime;
+        return true;
     }
 
     private void validateThenSave(String title, String content, boolean hasReminder) {
