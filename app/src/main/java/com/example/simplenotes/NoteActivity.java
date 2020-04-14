@@ -16,8 +16,6 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 public class NoteActivity extends AppCompatActivity {
-    private static ArrayList<Note> mNotes = new ArrayList<>();
-    private static int numberOfNotes = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +27,6 @@ public class NoteActivity extends AppCompatActivity {
         //no fab
         Spinner spinnerCourses = findViewById(R.id.spinner_courses);
 
-
-        NotesHandler notes = new NotesHandler();
-        notes.getAllNotesFromDB(this);
-        mNotes = notes.getmNotes();
-        numberOfNotes = mNotes.size();
     }
 
     @Override
