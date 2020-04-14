@@ -11,28 +11,24 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class NoteActivity extends AppCompatActivity {
     private static ArrayList<Note> mNotes = new ArrayList<>();
     private static int numberOfNotes = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_note);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton createNewNote = findViewById(R.id.dashboard_actions);
-        createNewNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent newNoteScreen = new Intent(MainActivity.this, new_note.class);
-                startActivity(newNoteScreen);
-            }
-        });
+        //no fab
+        Spinner spinnerCourses = findViewById(R.id.spinner_courses);
+
 
         NotesHandler notes = new NotesHandler();
         notes.getAllNotesFromDB(this);
